@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Super Mario Bros Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Import Map for Three.js CDN -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="game-container"></div>
+    <div id="ui-layer">
+        <div class="score-display">SCORE<br><span id="score">000000</span></div>
+        <div class="coins-display">COINS<br><span id="coins">x00</span></div>
+        <div class="lives-display">LIVES<br><span id="lives">3</span></div>
+        <div class="world-display">WORLD<br>1-1</div>
+        <div class="time-display">TIME<br><span id="time">400</span></div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
