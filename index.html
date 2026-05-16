@@ -1,29 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Super Mario Bros Clone</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Import Map for Three.js CDN -->
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-            }
-        }
-    </script>
-</head>
+    <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>3D Super Mario Bros Clone</title>
+        <link rel="stylesheet" href="style.css">
+        <!-- Import Map for Three.js CDN -->
+        <script type="importmap">
+                {
+                    "imports": {
+                        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+                    }
+                }
+        </script>
+    </head>
 <body>
-    <div id="game-container"></div>
-    <div id="ui-layer">
-        <div class="score-display">SCORE<br><span id="score">000000</span></div>
-        <div class="coins-display">COINS<br><span id="coins">x00</span></div>
-        <div class="lives-display">LIVES<br><span id="lives">3</span></div>
-        <div class="world-display">WORLD<br>1-1</div>
-        <div class="time-display">TIME<br><span id="time">400</span></div>
-    </div>
+        <div id="game-container"></div>div>
+        <div id="ui-layer" style="opacity: 0;">
+                    <div class="top-bar">
+                                    <div class="stat"><span class="label">SCORE</span>span><br><span id="score">000000</span>span></div>div>
+                                    <div class="stat"><span class="label">COINS</span>span><br><span id="coins">x00</span>span></div>div>
+                                    <div class="stat"><span class="label">LIVES</span>span><br>x<span id="lives">3</span>span></div>div>
+                                    <div class="stat world-display"><span class="label">WORLD</span>span><br>1-1</div>div>
+                                    <div class="stat"><span class="label">TIME</span>span><br><span id="time">400</span>span></div>div>
+                    </div>div>
+                    <div id="crosshair">+</div>div>
+        </div>div>
+
+        <div id="main-menu" class="overlay" style="background: rgba(0,0,0,0.55); display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 60px;">
+                    <!-- Left: Controls -->
+                    <div style="background: rgba(0,0,0,0.75); padding: 40px; border-radius: 20px; border: 2px solid #555; min-width: 340px;">
+                                    <h1 style="font-size: 2.5rem; margin-bottom: 16px; color: #ffeb3b; text-shadow: 4px 4px #d32f2f;">SUPER MARIO 3D</h1>h1>
+                                    <p id="high-score-display" style="font-size: 1rem; color: #fff; margin-bottom: 20px;">HIGH SCORE: 0</p>p>
+                                    <div style="margin-bottom: 20px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                                                        <h3 style="color: #aaa; margin-bottom: 15px; font-size: 12px;">Select Level</h3>h3>
+                                                        <select id="level-select" style="width: 100%; margin-bottom: 20px;">
+                                                                                <option value="0">WORLD 1-1</option>option>
+                                                                                <option value="1">WORLD 1-2</option>option>
+                                                                                <option value="2">WORLD 1-3</option>option>
+                                                        </select>select>
+                                                        <h3 style="color: #aaa; margin-bottom: 15px; font-size: 12px;">Customize Mario</h3>h3>
+                                                        <div class="color-picker"><label>Hat:</label><input type="color" id="color-hat" value="#ff0000"></div>div>
+                                                    <div class="color-picker"><label>Shirt:</label><input type="color" id="color-shirt" value="#ff0000"></div>div>
+                                                    <div class="color-picker"><label>Pants:</label><input type="color" id="color-pants" value="#0000ff"></div>div>
+                                                    <div class="color-picker"><label>Shoes:</label><input type="color" id="color-shoes" value="#663300"></div>div>
+                                    </div>div>
+                                <button id="start-btn">START GAME</button>button>
+                    </div>div>
+                <!-- Right: Mario Preview Canvas -->
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                            <p style="font-size: 11px; color: #ffeb3b; margin-bottom: 10px;">CHARACTER PREVIEW</p>p>
+                            <canvas id="preview-canvas" width="260" height="360" style="border-radius: 16px; border: 3px solid #ffeb3b; background: #1a2a5e;"></canvas>canvas>
+                </div>div>
+        </div>div>
+
+    <div id="pause-screen" class="overlay hidden">
+            <h1>PAUSED</h1>
+            <p>Click anywhere to resume</p>
+    </div>div>
+
+    <!-- Game Clear Screen -->
+    <div id="game-clear" class="overlay hidden" style="background: rgba(255, 215, 0, 0.8);">
+            <h1 style="font-size: 4rem; color: #fff; text-shadow: 4px 4px #d32f2f;">CONGRATULATIONS!</h1>
+            <p style="font-size: 1.5rem; margin-top: 10px;">WORLD CLEARED!</p>
+            <p id="final-score" style="font-size: 2rem; margin-top: 20px; color: #ff0000; font-weight: bold;">SCORE: 0</p>
+            <button id="return-menu-btn" style="padding: 15px 30px; font-size: 1.5rem; margin-top: 30px; cursor: pointer; font-family: 'Press Start 2P', monospace; background-color: #ffeb3b; border: 4px solid #fff; border-radius: 8px;">MENU</button>button>
+    </div>div>
+
     <script type="module" src="main.js"></script>
 </body>
-</html>
+</html>html>
+</p></h1></label></label>
+</body></title>
+    </head>
