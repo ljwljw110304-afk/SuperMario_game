@@ -1,43 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
 }
 
 body {
-    overflow: hidden;
-    background-color: #5c94fc; /* Mario Sky Blue */
+        overflow: hidden;
+        background-color: #5c94fc; /* Mario Sky Blue */
     font-family: 'Press Start 2P', cursive;
 }
 
 #game-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
 }
 
-#ui-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 2;
-    pointer-events: none;
-    display: flex;
-    justify-content: space-around;
-    padding-top: 20px;
-    color: white;
-    text-shadow: 2px 2px 0 #000;
-    font-size: 1.5rem;
+#ui-layer { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; transition: opacity 0.3s; z-index: 2; }
+.top-bar { display: flex; justify-content: space-around; font-family: 'Press Start 2P', monospace; color: white; text-shadow: 2px 2px 0 #000; padding: 20px; font-size: 20px; }
+.stat { text-align: center; line-height: 1.5; }
+#crosshair { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.5); font-size: 24px; font-family: sans-serif; pointer-events: none; }
+
+.overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6); display: flex; flex-direction: column;
+        justify-content: center; align-items: center; color: white;
+        font-family: 'Press Start 2P', monospace; z-index: 100; text-align: center;
 }
+.overlay.hidden { display: none !important; }
+.overlay h1 { color: #FFD700; text-shadow: 4px 4px 0 #ff0000; margin-bottom: 40px; }
+
+.menu-section { margin-bottom: 30px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; border: 2px solid #555; min-width: 300px; }
+.menu-section h3 { margin-top: 0; color: #aaa; font-size: 14px; margin-bottom: 15px; }
+
+select { font-family: 'Press Start 2P', monospace; padding: 10px; font-size: 16px; background: #333; color: white; border: 2px solid white; cursor: pointer; }
+
+.color-picker { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 12px; }
+.color-picker label { margin-right: 15px; }
+input[type="color"] { width: 50px; height: 30px; cursor: pointer; border: none; background: transparent; }
+
+#start-btn { font-family: 'Press Start 2P', monospace; background: #e52521; color: white; font-size: 20px; padding: 15px 30px; border: 4px solid white; cursor: pointer; transition: transform 0.1s, background 0.2s; pointer-events: auto; }
+#start-btn:hover { background: #ff4500; transform: scale(1.05); }
+#start-btn:active { transform: scale(0.95); }
+
+.rainbow-text {
+        background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+        -webkit-background-clip: text; color: transparent; animation: rainbow 5s linear infinite;
+}
+@keyframes rainbow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 
 .score-display, .coins-display, .world-display, .time-display {
-    text-align: center;
-    line-height: 1.5;
+        text-align: center;
+        line-height: 1.5;
 }
